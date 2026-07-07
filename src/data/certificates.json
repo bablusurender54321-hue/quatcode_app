@@ -1,0 +1,53 @@
+{
+  "certificates": [
+    {
+      "id": "BQF-2026-MNIT-4678",
+      "name": "VAIBHAV CHAUHAN",
+      "course": "Basics of Quantitative Finance",
+      "issueDate": "2026-06-29",
+      "status": "valid"
+    },
+    {
+      "id": "BQF-2026-MNIT-5869",
+      "name": "ANANYA KUMAR SRIVASTAVA",
+      "course": "Basics of Quantitative Finance",
+      "issueDate": "2026-06-29",
+      "status": "valid"
+    },
+    {
+      "id": "BQF-2026-MNIT-2389",
+      "name": "CHANDRESH ROPIA",
+      "course": "Basics of Quantitative Finance",
+      "issueDate": "2026-06-29",
+      "status": "valid"
+    },
+    {
+      "id": "BQF-2026-MNIT-5986",
+      "name": "KAVYANSH SINGH",
+      "course": "Basics of Quantitative Finance",
+      "issueDate": "2026-06-29",
+      "status": "valid"
+    },
+    {
+      "id": "BQF-2026-VNIT-6959",
+      "name": "SHIVANSH BISHT",
+      "course": "Basics of Quantitative Finance",
+      "issueDate": "2026-06-29",
+      "status": "valid"
+    },
+     {
+      "id": "SOQ-2026-MNIT-7689",
+      "name": "VAIBHAV CHAUHAN",
+      "course": "SUMMER OF QUANT 2026",
+      "issueDate": "2026-06-29",
+      "status": "valid"
+    },
+    {
+      "id": "SOQ-2026-MNIT-3595",
+      "name": "ANANYA KUMAR SRIVASTAVA",
+      "course": "SUMMER OF QUANT 2026",
+      "issueDate": "2026-06-29",
+      "status": "valid"
+    }
+  ]
+}
