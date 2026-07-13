@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/ca/*"
+  to = "https://quantcode-ca.netlify.app/ca/:splat"
+  status = 200
+  force = true
