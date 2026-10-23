@@ -54,3 +54,26 @@ a { color:inherit; }
 .hero-eyebrow { display:flex; flex-direction:column; gap:5px; }
 .hero-eyebrow span:first-child { order:1; }
 .hero-eyebrow span:last-child { order:2; }
+/* Interaction-led motion: the visitor drives the movement. */
+.notebook-card { transition: transform .28s cubic-bezier(.22,.61,.36,1), box-shadow .28s ease; }
+.notebook-card:hover { transform: rotate(.4deg) translateY(-5px); box-shadow:18px 19px 0 var(--yellow); }
+.animated-path { animation:none; stroke-dasharray:none; stroke-dashoffset:0; }
+.chart-art { cursor:crosshair; }
+.chart-art svg { overflow:visible; }
+.chart-crosshair { stroke:rgba(240,199,107,.55); stroke-width:1; stroke-dasharray:3 5; vector-effect:non-scaling-stroke; pointer-events:none; }
+.chart-crosshair-horizontal { stroke:rgba(255,255,255,.34); }
+.chart-marker { fill:var(--yellow); stroke:#fff7d8; stroke-width:2; vector-effect:non-scaling-stroke; pointer-events:none; }
+.chart-readout { position:absolute; transform:translate(10px,-135%); padding:4px 6px; background:var(--yellow); color:var(--ink); font-size:.62rem; font-weight:700; pointer-events:none; white-space:nowrap; }
+.chart-pulse { display:none; }
+.focus-glyph i { animation:none; transition:transform .35s cubic-bezier(.2,.8,.2,1), background .25s; }
+.focus-card:hover .focus-glyph i:nth-child(1) { transform:translate(7px,-5px); background:var(--yellow); }
+.focus-card:hover .focus-glyph i:nth-child(2) { transform:translate(-2px,7px); background:var(--yellow); }
+.focus-card:hover .focus-glyph i:nth-child(3) { transform:translate(-7px,-3px); background:var(--yellow); }
+.orbit-ring { animation:none; transition:transform .7s cubic-bezier(.2,.8,.2,1); }
+.quant-orbit-wrap:hover .ring-one { transform:rotate(18deg) scale(1.04); }
+.quant-orbit-wrap:hover .ring-two { transform:rotate(-24deg) scale(.96); }
+.orbit-dot { animation:none; transition:transform .45s cubic-bezier(.2,.8,.2,1); }
+.quant-orbit-wrap:hover .dot-one { transform:translate(8px,-6px); }
+.quant-orbit-wrap:hover .dot-two { transform:translate(-7px,8px); }
+.quant-orbit-wrap:hover .dot-three { transform:translate(-4px,-7px); }
+@media(prefers-reduced-motion:reduce){.notebook-card,.focus-glyph i,.orbit-ring,.orbit-dot{transition:none}.chart-readout{display:none}}

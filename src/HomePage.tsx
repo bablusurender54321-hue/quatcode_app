@@ -49,8 +49,17 @@ function SiteFooter() { return <footer className="site-footer"><div><a className
 
 function Notebook() {
   const [mode, setMode] = useState(0)
+  const [chartPoint, setChartPoint] = useState({ x: 72, y: 42 })
   const current = notebookModes[mode]
-  return <Reveal className="hero-visual" delay={180}><div className="hero-card notebook-card"><div className="card-topline"><span>QUANTCODE / NOTEBOOK</span><span>{current.code}</span></div><div className="notebook-tabs">{notebookModes.map((item, index) => <button key={item.code} className={mode === index ? 'selected' : ''} onClick={() => setMode(index)}>{item.label}</button>)}</div><div className="chart-art"><span className="chart-label">live hypothesis</span><svg viewBox="0 0 480 220" role="img" aria-label={`${current.label} signal chart`}><path className="grid-line" d="M0 44H480M0 110H480M0 176H480M80 0V220M180 0V220M280 0V220M380 0V220" /><path className="chart-fill" d={`${current.path} V220 H0Z`} /><path className="chart-line animated-path" d={current.path} /></svg><div className="chart-pulse" /></div><div className="card-note"><span>{current.note}</span><strong>{current.value}<small> confidence</small></strong></div><div className="notebook-footer"><span>hover to inspect</span><span>scroll / compare / learn</span></div></div></Reveal>
+  const updateChartPoint = (event: React.PointerEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect()
+    setChartPoint({
+      x: Math.max(4, Math.min(96, ((event.clientX - rect.left) / rect.width) * 100)),
+      y: Math.max(8, Math.min(92, ((event.clientY - rect.top) / rect.height) * 100)),
+    })
+  }
+
+  return <Reveal className="hero-visual" delay={180}><div className="hero-card notebook-card"><div className="card-topline"><span>QUANTCODE / NOTEBOOK</span><span>{current.code}</span></div><div className="notebook-tabs">{notebookModes.map((item, index) => <button key={item.code} className={mode === index ? 'selected' : ''} onClick={() => setMode(index)}>{item.label}</button>)}</div><div className="chart-art" onPointerMove={updateChartPoint} onPointerLeave={() => setChartPoint({ x: 72, y: 42 })}><span className="chart-label">move across the trace</span><svg viewBox="0 0 480 220" role="img" aria-label={`${current.label} signal chart`}><path className="grid-line" d="M0 44H480M0 110H480M0 176H480M80 0V220M180 0V220M280 0V220M380 0V220" /><path className="chart-fill" d={`${current.path} V220 H0Z`} /><path className="chart-line" d={current.path} /><line className="chart-crosshair" x1={`${chartPoint.x}%`} x2={`${chartPoint.x}%`} y1="0" y2="100%" /><line className="chart-crosshair chart-crosshair-horizontal" x1="0" x2="100%" y1={`${chartPoint.y}%`} y2={`${chartPoint.y}%`} /><circle className="chart-marker" cx={`${chartPoint.x}%`} cy={`${chartPoint.y}%`} r="5" /></svg><div className="chart-readout" style={{ left: `${chartPoint.x}%`, top: `${chartPoint.y}%` }}>x {Math.round(chartPoint.x)} · y {Math.round(100 - chartPoint.y)}</div></div><div className="card-note"><span>{current.note}</span><strong>{current.value}<small> confidence</small></strong></div><div className="notebook-footer"><span>pointer = inspect</span><span>tabs = compare</span></div></div></Reveal>
 }
 
 function HomePage() {
@@ -61,5 +70,4 @@ function HomePage() {
 }
 
 export default HomePage
-
 
