@@ -1,0 +1,23 @@
+﻿import { useEffect, useRef, useState, type CSSProperties, type ReactNode, type WheelEvent } from 'react'
+import { ArrowLeft, ArrowRight, ArrowUpRight, Instagram, Linkedin, Menu, X } from 'lucide-react'
+import { siteConfig } from './config'
+
+const people = [
+  { name: 'Quantcode team', role: 'Club leadership', text: 'The people who keep the questions moving, make space for new members and turn ideas into shared sessions.', image: '/images/president.jpeg', year: '01 / leadership' },
+  { name: 'Research desk', role: 'Quantitative finance', text: 'A snapshot of the group working through models, assumptions, data and the discipline of explaining both.', image: '/images/js_quant.jpg', year: '02 / research' },
+  { name: 'Build sessions', role: 'Algorithms & ML', text: 'Hands-on time with code, experiments and the small details that make a quantitative idea useful.', image: '/images/js_aiml.jpg', year: '03 / build' },
+  { name: 'Club moments', role: 'Events & outreach', text: 'Workshops, talks and shared tables where difficult ideas become much easier to approach together.', image: '/images/js_event2.jpeg', year: '04 / moments' },
+]
+
+function Reveal({ children, delay = 0 }: { children: ReactNode; delay?: number }) { return <div className="reveal" style={{ '--reveal-delay': `${delay}ms` } as CSSProperties}>{children}</div> }
+
+export default function PeoplePage() {
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const trackRef = useRef<HTMLDivElement>(null)
+  useEffect(() => { const onScroll = () => setScrolled(window.scrollY > 24); window.addEventListener('scroll', onScroll, { passive: true }); const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible')), { threshold: .12 }); document.querySelectorAll('.reveal').forEach((element) => observer.observe(element)); return () => { window.removeEventListener('scroll', onScroll); observer.disconnect() } }, [])
+  const onWheel = (event: WheelEvent<HTMLDivElement>) => { if (trackRef.current && Math.abs(event.deltaY) > Math.abs(event.deltaX)) { event.preventDefault(); trackRef.current.scrollLeft += event.deltaY } }
+  return <div className="people-page"><header className={`site-nav ${scrolled ? 'is-scrolled' : ''}`}><a className="brand" href="/">quantcode</a><button className="menu-toggle" aria-label={menuOpen ? 'Close menu' : 'Open menu'} onClick={() => setMenuOpen((open) => !open)}>{menuOpen ? <X size={22} /> : <Menu size={22} />}</button><nav className={`nav-links ${menuOpen ? 'open' : ''}`}><a href="/">Home</a><a className="active" href="/people">People</a><a className="nav-cta" href={`mailto:${siteConfig.email}`}>Join the club <ArrowUpRight size={15} /></a></nav></header><main><section className="people-hero section-wrap"><Reveal><a className="back-link" href="/"><ArrowLeft size={15} /> Back to quantcode</a><p className="eyebrow">PEOPLE / THE HUMAN SIDE OF QUANT</p><h1>Every model<br /><em>starts with people.</em></h1><p className="people-lede">Meet the rooms, conversations and working sessions that make Quantcode a club — not just a subject.</p></Reveal></section><section className="people-track-section"><div className="track-heading section-wrap"><span className="section-kicker">01 / CLUB STORIES</span><span className="track-hint">Scroll horizontally <ArrowRight size={16} /></span></div><div className="people-track" ref={trackRef} onWheel={onWheel}>{people.map((person, index) => <Reveal key={person.name} delay={index * 80}><article className="person-card"><div className="person-image"><img src={person.image} alt="" /><span>{person.year}</span></div><div className="person-copy"><p>{person.role}</p><h2>{person.name}</h2><div className="person-rule" /><span>{person.text}</span></div></article></Reveal>)}</div></section><section className="people-note section-wrap"><Reveal><span className="section-kicker">02 / COME AS YOU ARE</span><h2>The best part of a technical club is the part that cannot be <em>automated.</em></h2><a className="button button-primary" href={`mailto:${siteConfig.email}`}>Start a conversation <ArrowUpRight size={17} /></a></Reveal></section></main><footer className="site-footer"><div><a className="brand" href="/">quantcode</a><p>Student-led quantitative finance club at MNIT Jaipur.</p></div><div className="footer-links"><a href={siteConfig.linkedin} target="_blank" rel="noreferrer"><Linkedin size={17} /> LinkedIn</a><a href={siteConfig.instagram} target="_blank" rel="noreferrer"><Instagram size={17} /> Instagram</a></div><small>© 2026 quantcode · Built by students, for students.</small></footer></div>
+}
+
+
