@@ -77,3 +77,40 @@ a { color:inherit; }
 .quant-orbit-wrap:hover .dot-two { transform:translate(-7px,8px); }
 .quant-orbit-wrap:hover .dot-three { transform:translate(-4px,-7px); }
 @media(prefers-reduced-motion:reduce){.notebook-card,.focus-glyph i,.orbit-ring,.orbit-dot{transition:none}.chart-readout{display:none}}
+
+/* The scroll trader is a deliberately goofy, hand-built guide between sections. */
+.scroll-trader { position:fixed; right:clamp(16px,3vw,42px); bottom:22px; z-index:18; width:148px; pointer-events:none; }
+.trader-bubble { position:relative; width:max-content; max-width:148px; margin:0 0 10px auto; padding:9px 11px; border:2px solid var(--ink); border-radius:12px 12px 3px 12px; background:#fffdf8; box-shadow:4px 4px 0 var(--yellow); transform:rotate(2deg); }
+.trader-bubble:after { content:''; position:absolute; right:13px; bottom:-9px; width:13px; height:13px; background:#fffdf8; border-right:2px solid var(--ink); border-bottom:2px solid var(--ink); transform:skew(10deg) rotate(45deg); }
+.trader-bubble strong,.trader-bubble span { display:block; position:relative; z-index:1; }
+.trader-bubble strong { color:var(--green); font-size:.57rem; letter-spacing:.12em; }
+.trader-bubble span { margin-top:4px; color:var(--muted); font-size:.64rem; line-height:1.2; }
+.trader-stage { position:relative; height:112px; animation:trader-arrive .7s cubic-bezier(.2,.9,.25,1.2) both; transform-origin:bottom center; }
+.trader-body { position:absolute; left:52px; top:30px; width:53px; height:55px; border:3px solid var(--ink); border-radius:48% 48% 38% 38%; background:var(--yellow); box-shadow:inset 0 -9px 0 rgba(174,122,37,.16); }
+.trader-body:before { content:''; position:absolute; left:11px; top:-21px; width:26px; height:20px; border:3px solid var(--ink); border-bottom:0; border-radius:50% 50% 0 0; background:var(--green); transform:rotate(-6deg); }
+.trader-eye { position:absolute; top:19px; width:6px; height:8px; border-radius:50%; background:var(--ink); }
+.eye-one { left:13px; }.eye-two { right:13px; }
+.trader-smile { position:absolute; left:19px; top:32px; width:15px; height:8px; border-bottom:3px solid var(--ink); border-radius:50%; }
+.trader-arm { position:absolute; top:39px; width:24px; height:8px; border:3px solid var(--ink); border-radius:9px; background:var(--yellow); }
+.arm-one { left:-20px; transform:rotate(28deg); }.arm-two { right:-20px; transform:rotate(-22deg); }
+.trader-laptop { position:absolute; left:30px; top:70px; width:82px; height:32px; border:3px solid var(--ink); border-radius:5px 5px 9px 9px; background:var(--green); transform:rotate(-3deg); }
+.trader-laptop:after { content:''; position:absolute; left:-8px; right:-8px; bottom:-7px; height:6px; border:3px solid var(--ink); border-radius:3px; background:var(--yellow); }
+.trader-laptop span { position:absolute; left:9px; top:3px; color:var(--yellow); font:1.2rem var(--serif); }
+.trader-laptop b,.trader-laptop b:before,.trader-laptop b:after { position:absolute; height:3px; background:#b6d8c1; content:''; }
+.trader-laptop b { left:30px; top:9px; width:36px; }.trader-laptop b:before { left:0; top:7px; width:25px; }.trader-laptop b:after { left:0; top:14px; width:31px; }
+.trader-chart { position:absolute; left:0; top:6px; width:52px; height:34px; border:2px solid var(--ink); background:#fffdf8; transform:rotate(-8deg); z-index:2; }
+.trader-chart:before { content:''; position:absolute; inset:5px; background:linear-gradient(150deg,transparent 0 34%,var(--green) 35% 40%,transparent 41% 56%,var(--yellow) 57% 62%,transparent 63%); }
+.trader-chart i { position:absolute; width:4px; height:4px; border-radius:50%; background:var(--green); z-index:1; }.trader-chart i:nth-child(1){left:8px;bottom:8px}.trader-chart i:nth-child(2){left:20px;top:13px}.trader-chart i:nth-child(3){left:32px;bottom:11px}.trader-chart i:nth-child(4){right:6px;top:7px;background:var(--yellow)}
+.trader-shadow { position:absolute; left:38px; bottom:0; width:79px; height:9px; border-radius:50%; background:rgba(24,35,31,.18); filter:blur(2px); }
+.trader-caption { display:block; margin-top:3px; color:var(--muted); text-align:center; font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; }.trader-caption span{color:var(--green);font-size:.9rem}
+.scroll-trader-think .trader-body { background:var(--mint); }.scroll-trader-think .trader-chart { transform:rotate(7deg) translateY(-5px); }
+.scroll-trader-signal .trader-chart { transform:rotate(-12deg) translateY(-9px) scale(1.08); }.scroll-trader-signal .arm-one { transform:rotate(-25deg); }
+.scroll-trader-trade .trader-laptop { transform:rotate(4deg) translateY(-5px); }.scroll-trader-trade .trader-body { background:#dbe5f3; }
+.scroll-trader-plot .trader-body { background:#f5c7ba; }.scroll-trader-plot .trader-chart { transform:rotate(16deg); }.scroll-trader-plot .trader-smile { transform:rotate(180deg); }
+.scroll-trader-join .trader-body { background:var(--yellow); }.scroll-trader-join .arm-two { transform:rotate(-55deg) translateY(-8px); }
+@keyframes trader-arrive { 0% { opacity:0; transform:translateY(35px) rotate(-10deg) scale(.82); } 60% { transform:translateY(-8px) rotate(6deg) scale(1.04); } 100% { opacity:1; transform:translateY(0) rotate(0) scale(1); } }
+.project-section { position:relative; padding-top:45px; }
+.project-section:before { content:'BUY? SELL? LEARN.'; position:absolute; right:0; top:8px; color:var(--yellow); font-size:.68rem; font-weight:700; letter-spacing:.15em; transform:rotate(3deg); }
+.moments-grid figure { border:2px solid var(--ink); box-shadow:7px 7px 0 var(--yellow); transition:transform .3s ease,box-shadow .3s ease; }.moments-grid figure:hover{transform:translate(-4px,-6px) rotate(-1deg);box-shadow:12px 13px 0 var(--green)}.moments-grid figure:nth-child(2):hover{transform:translate(-4px,-6px) rotate(2deg)}
+@media(max-width:800px){.scroll-trader{right:12px;bottom:12px;transform:scale(.78);transform-origin:bottom right}.project-section:before{display:none}}
+@media(prefers-reduced-motion:reduce){.trader-stage{animation:none}.moments-grid figure{transition:none}}
